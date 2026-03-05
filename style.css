@@ -173,12 +173,27 @@
             border-bottom: 1px solid #e2e8f0;
             text-align: center;
         }
-
-        input[type="time"],
+        /* Ajuste para os novos inputs de texto/tel */
+        input[type="tel"],
+        input[type="text"],
         input[type="date"] {
-            padding: 8px;
+            padding: 12px 8px;
+            /* Mais alto para facilitar o toque */
+            font-size: 1rem;
+            text-align: center;
             border: 1px solid #cbd5e1;
-            border-radius: 4px;
+            border-radius: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            /* Remove sombras no iOS */
+        }
+
+        /* Destaque visual quando o campo está em foco */
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+            background-color: #f0f7ff;
         }
 
         /* SEÇÃO DE TOTAIS */
