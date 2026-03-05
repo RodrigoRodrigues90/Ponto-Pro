@@ -133,6 +133,28 @@ function importarDados(input) {
     reader.readAsText(input.files[0]);
 }
 
+// Função para excluir todos os dados da tabela e do LocalStorage
+function limparTudo() {
+    const confirmacao = confirm("ATENÇÃO: Isso apagará todos os dias lançados e o backup do navegador. Deseja continuar?");
+    
+    if (confirmacao) {
+        // Limpa o LocalStorage
+        localStorage.removeItem('ponto_db');
+        
+        // Limpa a tabela visualmente
+        const tbody = document.getElementById('corpoTabela');
+        tbody.innerHTML = '';
+        
+        // Adiciona uma linha em branco para começar de novo
+        adicionarLinha();
+        
+        // Atualiza os cálculos (zerando os totais)
+        atualizarTotais();
+        
+        alert("Dados excluídos com sucesso!");
+    }
+}
+
 // Remove uma linha específica
 function removerLinha(btn) { 
     if(confirm("Deseja excluir este dia?")) {

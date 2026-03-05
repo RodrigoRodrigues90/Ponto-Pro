@@ -110,7 +110,8 @@
             background: var(--success);
             color: white;
         }
-        .btn-clear{
+
+        .btn-clear {
             background: var(--danger);
             color: white;
         }
