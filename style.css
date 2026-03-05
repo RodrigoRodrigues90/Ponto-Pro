@@ -7,11 +7,22 @@
             --dark: #1e293b;
         }
 
+        html {
+            height: 100%;
+        }
+
         body {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
             font-family: 'Segoe UI', system-ui, sans-serif;
             background: var(--bg);
             margin: 0;
-            padding-bottom: 40px;
+        }
+
+        header,
+        footer {
+            flex-shrink: 0;
         }
 
         header {
@@ -173,12 +184,11 @@
             border-bottom: 1px solid #e2e8f0;
             text-align: center;
         }
-        /* Ajuste para os novos inputs de texto/tel */
+
         input[type="tel"],
         input[type="text"],
         input[type="date"] {
             padding: 12px 8px;
-            /* Mais alto para facilitar o toque */
             font-size: 1rem;
             text-align: center;
             border: 1px solid #cbd5e1;
@@ -189,7 +199,6 @@
             /* Remove sombras no iOS */
         }
 
-        /* Destaque visual quando o campo está em foco */
         input:focus {
             border-color: var(--primary);
             outline: none;
@@ -272,5 +281,50 @@
             .container {
                 box-shadow: none;
                 width: 100%;
+            }
+        }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px 10px;
+            background-color: var(--dark);
+            color: #94a3b8;
+            /* Cinza suave */
+            text-align: center;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        footer strong {
+            color: var(--white);
+        }
+
+        footer a {
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        footer a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+
+        .footer-content p {
+            margin: 5px 0;
+        }
+
+        .creditos {
+            margin-top: 15px !important;
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            padding-top: 10px;
+        }
+
+        @media print {
+            footer {
+                display: none !important;
             }
         }

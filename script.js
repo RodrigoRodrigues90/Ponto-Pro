@@ -216,3 +216,18 @@ function removerLinha(btn) {
         salvarAuto(); 
     }
 }
+window.onload = () => {
+    // 1. Carrega os dados salvos ou inicia uma linha vazia
+    const salvo = localStorage.getItem('ponto_db');
+    if (salvo) {
+        aplicarEstado(JSON.parse(salvo));
+    } else {
+        adicionarLinha();
+    }
+    
+    // 2. Insere o ano atual no Footer automaticamente
+    const elementoAno = document.getElementById('anoAtual');
+    if (elementoAno) {
+        elementoAno.innerText = new Date().getFullYear();
+    }
+};
