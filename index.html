@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2838/2838779.png">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2838/2838779.png">
+    <script src="script.js" defer></script>
+    <title>Ponto Pro</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Ponto Pro</h1>
+        <button class="btn-help" onclick="toggleModal()">?</button>
+    </header>
+
+    <div class="container">
+        <div class="setup-grid">
+            <div><label>Salário Base (R$)</label><input type="number" id="salario" value="2000" oninput="salvarAuto()">
+            </div>
+            <div><label>Adicional HE (%)</label><input type="number" id="porcentagem" value="50" oninput="salvarAuto()">
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn-clear" onclick="limparTudo()">🗑️ Limpar Tudo</button>
+            <button class="btn-save" onclick="exportarDados()">💾 Exportar</button>
+            <button class="btn-load" onclick="document.getElementById('fileInput').click()">📂 Importar</button>
+            <button class="btn-print" onclick="window.print()">🖨️ PDF</button>
+            <button class="btn-add" onclick="adicionarLinha()">+ Novo Dia</button>
+
+            <input type="file" id="fileInput" style="display:none" accept=".json" onchange="importarDados(this)">
+        </div>
+
+        <div class="table-container">
+            <table id="tabelaPonto">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Entrada</th>
+                        <th>Saída Almoço</th>
+                        <th>Volta Almoço</th>
+                        <th>Saída Final</th>
+                        <th>Líquido</th>
+                        <th>Extras</th>
+                        <th class="delete-col"></th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabela"></tbody>
+            </table>
+        </div>
+
+        <div class="resumo">
+            <div class="card-resumo">
+                <span>Total Horas Extras</span>
+                <b id="totalHE">00:00</b>
+            </div>
+            <div class="card-resumo">
+                <span>Valor das Extras</span>
+                <b id="valorReceber">R$ 0,00</b>
+            </div>
+            <div class="card-resumo" style="border-left-color: var(--success);">
+                <span>Salário + Extras</span>
+                <b id="totalComSalario">R$ 0,00</b>
+            </div>
+        </div>
+    </div>
+
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="toggleModal()">&times;</span>
+
+            <h3 style="border-bottom: 2px solid var(--primary); padding-bottom: 10px;">Como usar o Ponto Pro</h3>
+
+            <div style="margin-top: 15px;">
+                <h4 style="margin-bottom: 5px; color: var(--dark);">🧮 Regras de Cálculo</h4>
+                <ul style="padding-left: 20px; font-size: 0.9rem;">
+                    <li><strong>Jornada 6x1:</strong> Configurada para a meta de <strong>07:20</strong>horas por dia.
+                    </li>
+                    <li><strong>Líquido:</strong> Soma dos dois períodos de trabalho (manhã e tarde), subtraindo o
+                        intervalo.</li>
+                    <li><strong>Extras:</strong> Todo tempo que exceder 7h20min em um único dia é contabilizado na
+                        coluna de Extras.</li>
+                    <li><strong>Valor Hora:</strong> Calculado com base no divisor <strong>220h</strong> (Salário /
+                        220).</li>
+                </ul>
+
+                <h4 style="margin-bottom: 5px; color: var(--dark);">💾 Gestão de Dados</h4>
+                <ul style="padding-left: 20px; font-size: 0.9rem;">
+                    <li><strong>Autossalvamento:</strong> O sistema salva seus dados localmente no navegador em tempo
+                        real.</li>
+                    <li><strong>Exportar:</strong> Gera um arquivo <code>.json</code>. usado para gravar o estado atual
+                        da sua tabela de horas.</li>
+                    <li><strong>Importar:</strong> Restaura os dados de um arquivo de backup que você salvou
+                        anteriormente.</li>
+                </ul>
+
+                <h4 style="margin-bottom: 5px; color: var(--dark);">📄 Relatórios</h4>
+                <ul style="padding-left: 20px; font-size: 0.9rem;">
+                    <li><strong>PDF/Imprimir:</strong> Gera uma versão limpa da tabela. No celular, selecione "Salvar
+                        como PDF" na tela de impressão.</li>
+                    <li><strong>Responsividade:</strong> No celular, deslize a tabela lateralmente para visualizar as
+                        colunas de cálculos.</li>
+                </ul>
+            </div>
+
+            <div
+                style="background: #eff6ff; padding: 10px; border-radius: 6px; margin-top: 15px; font-size: 0.85rem; color: #1e40af;">
+                <strong>Dica:</strong> Para iniciar um novo mês, exporte o atual como backup e use o botão de "X" nas
+                linhas para limpar a tabela.
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
